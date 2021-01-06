@@ -7,9 +7,13 @@ public class SpawnManager : MonoBehaviour
 
     [SerializeField]
     private GameObject _childrenPrefab; //created game object for children prefab
+    [SerializeField]
+    private GameObject _presentPrefab; //created game object for present prefab
 
     [SerializeField]
     private GameObject _childrenContainer; //created children container to use as parent
+    [SerializeField]
+    private GameObject _presentContainer; //created present container ot use as parent
 
     private bool _stopSpawning = false; //Created boolean to be used to stop spawning when player loses
 
@@ -18,6 +22,7 @@ public class SpawnManager : MonoBehaviour
     {
         //calling spawning function
         StartCoroutine(SpawnRoutine());
+        StartCoroutine(SpawnRoutineTwo());
     }
 
     // Update is called once per frame
@@ -39,6 +44,21 @@ public class SpawnManager : MonoBehaviour
             //Set newChild as a child to ChildrenContainer
             newChild.transform.SetParent(_childrenContainer.transform);
             //Wait 7seconds before spawning next child
+            yield return new WaitForSeconds(2f);
+        }
+    }
+
+    IEnumerator SpawnRoutineTwo()
+    {
+        while(_stopSpawning == false)
+        {
+            //presents will spawn between the range of (X -8.1f and 8.1f) and (Y -4.2f and 4.2f)
+            Vector2 posToSpawn = new Vector2(Random.Range(-8.1f,8.1f),Random.Range(-4.2f,4.2f));
+            //spawns a present prefab
+            GameObject newChild = Instantiate(_presentPrefab, posToSpawn, Quaternion.identity);
+            //stores the present prefab in the PresentContainer
+            newChild.transform.SetParent(_presentContainer.transform);
+            //wait 2 seconds before spawning next present
             yield return new WaitForSeconds(2f);
         }
     }
