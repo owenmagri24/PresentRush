@@ -59,5 +59,26 @@ public class Player : MonoBehaviour
         {
             transform.position = new Vector3 (transform.position.x,-4.4f,0);
         }
+
+        /*player movement deduction
+        if (GetComponent<Present>().presentCount == 0)
+        {
+            Debug.Log("0 Presents");
+        }
+        
+        if (GetComponent<Present>().presentCount == 1)
+        {
+            Debug.Log("1 Presents");
+        }
+
+        if (GetComponent<Present>().presentCount == 2)
+        {
+            Debug.Log("2 Presents");
+        }
+
+        if (GetComponent<Present>().presentCount == 3)
+        {
+            Debug.Log("3 Presents");
+        }*/
     }
 }

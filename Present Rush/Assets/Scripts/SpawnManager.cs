@@ -13,7 +13,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private GameObject _childrenContainer; //created children container to use as parent
     [SerializeField]
-    private GameObject _presentContainer; //created present container ot use as parent
+    private GameObject _presentContainer; //created present container to use as parent
 
     private bool _stopSpawning = false; //Created boolean to be used to stop spawning when player loses
 
