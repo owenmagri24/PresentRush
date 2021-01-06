@@ -39,7 +39,7 @@ public class SpawnManager : MonoBehaviour
             //Set newChild as a child to ChildrenContainer
             newChild.transform.SetParent(_childrenContainer.transform);
             //Wait 7seconds before spawning next child
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(2f);
         }
     }
 }
