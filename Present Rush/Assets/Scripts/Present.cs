@@ -8,7 +8,7 @@ public class Present : MonoBehaviour
     //setting the amount of time presents need to despawn
     private float despawn = 5f;
 
-    public int presentCount = 0;
+    public static int presentCount = 0;
 
     // Start is called before the first frame update
     void Start()
