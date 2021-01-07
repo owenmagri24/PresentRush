@@ -8,13 +8,17 @@ public class Present : MonoBehaviour
     //setting the amount of time presents need to despawn
     private float despawn = 5f;
 
-    public static int presentCount = 0;
+    private GameManager _gameManager;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        //present counter is set to 0
-        presentCount = 0;
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        if(_gameManager == null)
+        {
+            Debug.Log("GameManager was not found");
+        }
         //start the despawn timer
         Destroy(this.gameObject, despawn);
     }
@@ -29,8 +33,7 @@ public class Present : MonoBehaviour
         //if player picks up present, present is destroyed (still need to add to console counter)
         if(other.transform.name == "Player")
         {
-            presentCount++;
-            Debug.Log("Present Count: "+ presentCount);
+            _gameManager.CollectedPresent();
             Destroy(this.gameObject);
         }
     }
