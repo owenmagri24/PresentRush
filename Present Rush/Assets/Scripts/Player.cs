@@ -9,19 +9,29 @@ public class Player : MonoBehaviour
     [SerializeField]
     //setting player movement speed
 
-    private float _speed = 6.5f;
+    public float speed = 6.5f;
+    private GameManager _gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
         //set player position to (X 0)(Y 0)(Y 0)
         transform.position = new Vector3(0,0,0);
+
+        //finding the GameManager object and then the script itself
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        //preventing crashes, if GameManager isn't found a message will be included in the console
+        if(_gameManager == null)
+        {
+            Debug.Log("GameManager was not found");
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        playerMovement();  
+        playerMovement();
+        _gameManager.PlayerSpeed();
     }
 
     void playerMovement()
@@ -32,7 +42,7 @@ public class Player : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
 
         Vector3 direction = new Vector3(horizontal,vertical,0);
-        transform.Translate(direction * _speed * Time.deltaTime);
+        transform.Translate(direction * speed * Time.deltaTime);
 
         //player boundaries / walls
 
@@ -60,25 +70,6 @@ public class Player : MonoBehaviour
             transform.position = new Vector3 (transform.position.x,-4.4f,0);
         }
 
-        /*player movement deduction
-        if (GetComponent<Present>().presentCount == 0)
-        {
-            Debug.Log("0 Presents");
-        }
-        
-        if (GetComponent<Present>().presentCount == 1)
-        {
-            Debug.Log("1 Presents");
-        }
-
-        if (GetComponent<Present>().presentCount == 2)
-        {
-            Debug.Log("2 Presents");
-        }
-
-        if (GetComponent<Present>().presentCount == 3)
-        {
-            Debug.Log("3 Presents");
-        }*/
+        /*player movement deduction*/
     }
 }
