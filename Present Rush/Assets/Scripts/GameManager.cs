@@ -38,7 +38,16 @@ public class GameManager : MonoBehaviour
         else
         {
             Debug.Log("Present Count: "+ _presentCount);
-            //keep going until if condition is reached; in this case more than 3 presents
+            // Destroys present if player has less than 3presents. This way, the presents don't get destroyed if player has 3 presents already.
+            Destroy(GameObject.FindWithTag("Present")); 
+        }
+    }
+
+    public void ChildDestroy()
+    {
+        if(_presentCount  > 0)
+        {
+            Destroy(GameObject.FindWithTag("Children"));
         }
     }
 

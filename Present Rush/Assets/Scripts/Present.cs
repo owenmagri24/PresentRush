@@ -39,8 +39,6 @@ public class Present : MonoBehaviour
             //run the CollectedPresent(); function from GameManager script
             _gameManager.CollectedPresent();
             _gameManager.PresentLimit();
-            //if player picks up present, present is destroyed
-            Destroy(this.gameObject);
         }
     }
 }
