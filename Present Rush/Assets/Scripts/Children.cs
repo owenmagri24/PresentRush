@@ -29,12 +29,13 @@ public class Children : MonoBehaviour
         
     }
     
-    //function to destroy child on collision with player
     private void OnTriggerEnter(Collider other) {
-        //If Child collides with player, child is destroyed
-        if(other.transform.name == "Player")
+        //If Child collides with player AND player has presents, child is destroyed and present count is deducted by 1
+        if(other.transform.name == "Player" && _gameManager.presentCount > 0)
         {
-            _gameManager.ChildDestroy();
+            Destroy(this.gameObject); //destroys child
+            _gameManager.presentCount--; //deducts presentcount by 1
+            Debug.Log("Present Count: "+ _gameManager.presentCount);
         }
     }
 }

@@ -484,7 +484,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52359f908045fe940b03ea475331b014, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _presentCount: 0
+  presentCount: 0
+  presentText: {fileID: 2021218762}
 --- !u!4 &1231898637
 Transform:
   m_ObjectHideFlags: 0
@@ -721,10 +722,10 @@ RectTransform:
   m_Father: {fileID: 410806777}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -176, y: 90}
-  m_SizeDelta: {x: 155.95258, y: 110.20735}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 101, y: -74}
+  m_SizeDelta: {x: 155.95258, y: 110.20734}
   m_Pivot: {x: 0.49999994, y: 0.49999976}
 --- !u!114 &2021218762
 MonoBehaviour:
@@ -747,10 +748,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 2
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -758,7 +759,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Presents: '
+  m_Text: '#Present_Count'
 --- !u!222 &2021218763
 CanvasRenderer:
   m_ObjectHideFlags: 0

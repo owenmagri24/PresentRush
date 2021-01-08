@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
-    private int _presentCount;
+    public int presentCount; //public variable to be accessed by other scripts
+
+    public Text presentText; //Fetching Text object to update numbers of presents on screen
 
     private Player _player;
 
@@ -13,52 +16,45 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _player = GameObject.Find("Player").GetComponent<Player>();
-        _presentCount = 0;
+        presentCount = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        presentText.text = "Presents: "+ presentCount; //Displays and updates present count
     }
 
     public void CollectedPresent()
     {
-        _presentCount++;
+        presentCount++;
     }
 
     public void PresentLimit()
     {
-        if (_presentCount > 3)
+        if (presentCount > 3)
         {
-            _presentCount--;
-            Debug.Log("Present Count: "+ _presentCount);
             //lower presentCount from 4 to 3 and keep the limit of presents at 3 at all time
+            presentCount--;
+            Debug.Log("Present Count: "+ presentCount);
+            
         }
         else
         {
-            Debug.Log("Present Count: "+ _presentCount);
+            Debug.Log("Present Count: "+ presentCount);
             // Destroys present if player has less than 3presents. This way, the presents don't get destroyed if player has 3 presents already.
             Destroy(GameObject.FindWithTag("Present")); 
         }
     }
 
-    public void ChildDestroy()
-    {
-        if(_presentCount  > 0)
-        {
-            Destroy(GameObject.FindWithTag("Children"));
-        }
-    }
-
     public void PlayerSpeed()
     {
-        if (_presentCount <= 1)
+        if (presentCount <= 1)
         {
             //do nothing
         }
 
-        else if (_presentCount == 2)
+        else if (presentCount == 2)
         {
             _player.speed = 5.5f;
         }
