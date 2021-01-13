@@ -106,4 +106,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3490645d87921f43a3e7ccaf3736060, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  despawn: 3
+  _despawn: 7
+  _timeLeft: 7
+  _childObject: {fileID: 3576400360328920835}

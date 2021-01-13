@@ -6,7 +6,10 @@ public class Children : MonoBehaviour
 {
     //Despawn timer variable. SerializeField given to be changed by designers
     [SerializeField]
-    private float despawn = 3f;
+    private float _despawn = 7f;
+
+    [SerializeField]
+    private Renderer _childObject; //Child prefab variable
 
     private GameManager _gameManager;
     void Start()
@@ -20,13 +23,13 @@ public class Children : MonoBehaviour
         }
 
         //destroys game object after set amount of seconds
-        Destroy(this.gameObject, despawn); 
+        Destroy(this.gameObject, _despawn); 
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        ChildChangeColor();//calling function
     }
     
     private void OnTriggerEnter(Collider other) {
@@ -36,6 +39,16 @@ public class Children : MonoBehaviour
             Destroy(this.gameObject); //destroys child
             _gameManager.presentCount--; //deducts presentcount by 1
             Debug.Log("Present Count: "+ _gameManager.presentCount);
+        }
+    }
+
+    //function to change color of child after certain amount of time to indicate that he is about to despawn
+    private void ChildChangeColor()
+    {
+        _despawn -= Time.deltaTime; //reducing _despawn variable per second
+        if(_despawn < 3f)
+        {
+            _childObject.material.color = Color.magenta;//changes the color of the object when despawn < 3
         }
     }
 }
