@@ -12,8 +12,12 @@ public class Children : MonoBehaviour
     private Renderer _childObject; //Child prefab variable
 
     private GameManager _gameManager;
+    
+    private SpawnManager _spawnManager;
     void Start()
     {
+        //finding the SpawnManager object and then the script itself
+        _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         //finding the GameManager object and then the script itself
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         //preventing crashes, if GameManager isn't found a message will be included in the console
@@ -49,6 +53,15 @@ public class Children : MonoBehaviour
         if(_despawn < 3f)
         {
             _childObject.material.color = Color.magenta;//changes the color of the object when despawn < 3
+        }
+
+        if(_despawn < 1f)
+        {
+            //destroy all game objects tagged Player, Children and Present if a child despawns - this is also game over for the player
+            Destroy(GameObject.FindWithTag("Player"));
+            Destroy(GameObject.FindWithTag("Children"));
+            Destroy(GameObject.FindWithTag("Present"));
+            _spawnManager.PlayerDies();
         }
     }
 }

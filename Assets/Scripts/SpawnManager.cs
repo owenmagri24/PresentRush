@@ -62,4 +62,10 @@ public class SpawnManager : MonoBehaviour
             yield return new WaitForSeconds(2f);
         }
     }
+
+    //stops spawning children and presents
+    public void PlayerDies()
+    {
+        _stopSpawning = true;
+    }
 }
