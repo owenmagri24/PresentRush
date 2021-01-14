@@ -8,8 +8,11 @@ public class Children : MonoBehaviour
     [SerializeField]
     private float _despawn = 7f;
 
-    [SerializeField]
-    private Renderer _childObject; //Child prefab variable
+    //[SerializeField]
+    //private Renderer _childObject; //Child prefab variable
+
+    [SerializeField] //AngryChild Sprite Variable
+    private Sprite _childSpriteAngry;
 
     private GameManager _gameManager;
     
@@ -33,7 +36,7 @@ public class Children : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ChildChangeColor();//calling function
+        ChildGameOver();//calling function
     }
     
     private void OnTriggerEnter(Collider other) {
@@ -47,12 +50,13 @@ public class Children : MonoBehaviour
     }
 
     //function to change color of child after certain amount of time to indicate that he is about to despawn
-    private void ChildChangeColor()
+    private void ChildGameOver()
     {
         _despawn -= Time.deltaTime; //reducing _despawn variable per second
         if(_despawn < 3f)
         {
-            _childObject.material.color = Color.magenta;//changes the color of the object when despawn < 3
+            //Gets the SpriteRenderer of this component and changes it to childSpriteAngry Variable
+            this.GetComponent<SpriteRenderer>().sprite = _childSpriteAngry;
         }
 
         if(_despawn < 1f)
