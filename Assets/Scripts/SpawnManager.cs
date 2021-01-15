@@ -48,6 +48,7 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
+    //Function to spawn Presents
     IEnumerator SpawnRoutineTwo()
     {
         while(_stopSpawning == false)
@@ -55,9 +56,9 @@ public class SpawnManager : MonoBehaviour
             //presents will spawn between the range of (X -8.1f and 8.1f) and (Y -4.2f and 4.2f)
             Vector2 posToSpawn = new Vector2(Random.Range(-8.1f,8.1f),Random.Range(-4.2f,4.2f));
             //spawns a present prefab
-            GameObject newChild = Instantiate(_presentPrefab, posToSpawn, Quaternion.identity);
+            GameObject newPresent = Instantiate(_presentPrefab, posToSpawn, Quaternion.identity);
             //stores the present prefab in the PresentContainer
-            newChild.transform.SetParent(_presentContainer.transform);
+            newPresent.transform.SetParent(_presentContainer.transform);
             //wait 2 seconds before spawning next present
             yield return new WaitForSeconds(2f);
         }

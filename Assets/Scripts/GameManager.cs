@@ -29,24 +29,6 @@ public class GameManager : MonoBehaviour
     {
         presentCount++;
     }
-
-    public void PresentLimit()
-    {
-        if (presentCount > 3)
-        {
-            //lower presentCount from 4 to 3 and keep the limit of presents at 3 at all time
-            presentCount--;
-            Debug.Log("Present Count: "+ presentCount);
-            
-        }
-        else
-        {
-            Debug.Log("Present Count: "+ presentCount);
-            // Destroys present if player has less than 3presents. This way, the presents don't get destroyed if player has 3 presents already.
-            Destroy(GameObject.FindWithTag("Present")); 
-        }
-    }
-
     public void PlayerSpeed()
     {
         if (presentCount <= 1)

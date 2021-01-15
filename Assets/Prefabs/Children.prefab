@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3490645d87921f43a3e7ccaf3736060, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _despawn: 7
+  _despawn: 8
   _childSpriteAngry: {fileID: 21300000, guid: 32ebf8b2d4b65c844a880d2aadaab3c4, type: 3}
 --- !u!212 &7579341678335757065
 SpriteRenderer:

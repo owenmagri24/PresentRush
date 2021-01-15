@@ -30,15 +30,18 @@ public class Present : MonoBehaviour
     {
 
     }
-    private void OnTriggerEnter(Collider other) 
+    void OnTriggerEnter(Collider other) 
     {
         
-        if(other.transform.name == "Player")
+        if(other.transform.name == "Player" &&  _gameManager.presentCount >= 3)
         {
-            
-            //run the CollectedPresent(); function from GameManager script
+            //If collides with player and present count 3 or higher, do nothing
+        }
+        else if (other.transform.name == "Player")
+        {
+            //else, add to preset count and destroy present
             _gameManager.CollectedPresent();
-            _gameManager.PresentLimit();
+            Destroy(this.gameObject);
         }
     }
 }
