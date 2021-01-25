@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Children : MonoBehaviour
 {
@@ -62,10 +63,12 @@ public class Children : MonoBehaviour
         if(_despawn < 1f)
         {
             //destroy all game objects tagged Player, Children and Present if a child despawns - this is also game over for the player
+            //also direct player to the "GameOver" scene
             Destroy(GameObject.FindWithTag("Player"));
             Destroy(GameObject.FindWithTag("Children"));
             Destroy(GameObject.FindWithTag("Present"));
             _spawnManager.PlayerDies();
+            SceneManager.LoadScene("GameOver");
         }
     }
 }
