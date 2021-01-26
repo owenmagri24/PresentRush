@@ -8,7 +8,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     public int presentCount; //public variable to be accessed by other scripts
 
-    public Text presentText; //Fetching Text object to update numbers of presents on screen
+    public int score; //score variable
+
+    public Text presentText; //Fetching persent text object to update numbers of presents on screen
+
+    public Text scoreText; //Fetcing score text object to update text
 
     private Player _player;
 
@@ -17,12 +21,14 @@ public class GameManager : MonoBehaviour
     {
         _player = GameObject.Find("Player").GetComponent<Player>();
         presentCount = 0;
+        score = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
         presentText.text = "Presents: "+ presentCount; //Displays and updates present count
+        scoreText.text = "Score: "+ score; //Displays and updates score
     }
 
     public void CollectedPresent()

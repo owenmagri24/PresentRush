@@ -7,13 +7,16 @@ public class Children : MonoBehaviour
 {
     //Despawn timer variable. SerializeField given to be changed by designers
     [SerializeField]
-    private float _despawn = 7f;
-
-    //[SerializeField]
-    //private Renderer _childObject; //Child prefab variable
+    private float _despawn = 8f;
 
     [SerializeField] //AngryChild Sprite Variable
     private Sprite _childSpriteAngry;
+
+    [SerializeField]
+    private Sprite _childSpriteNeutral;
+
+    [SerializeField]
+    private Sprite _childSpriteHappy;
 
     private GameManager _gameManager;
     
@@ -46,7 +49,8 @@ public class Children : MonoBehaviour
         {
             Destroy(this.gameObject); //destroys child
             _gameManager.presentCount--; //deducts presentcount by 1
-            Debug.Log("Present Count: "+ _gameManager.presentCount);
+            CalculateScore();
+            Debug.Log("Score:"+ _gameManager.score);
         }
     }
 
@@ -54,13 +58,17 @@ public class Children : MonoBehaviour
     private void ChildGameOver()
     {
         _despawn -= Time.deltaTime; //reducing _despawn variable per second
+
+        if(_despawn < 5f){
+            //Gets the SpriteRenderer of this component and changes it to childSpriteNeutral Variable
+            this.GetComponent<SpriteRenderer>().sprite = _childSpriteNeutral;
+        }
         if(_despawn < 3f)
         {
             //Gets the SpriteRenderer of this component and changes it to childSpriteAngry Variable
             this.GetComponent<SpriteRenderer>().sprite = _childSpriteAngry;
         }
-
-        if(_despawn < 1f)
+        if(_despawn < 0.2f)
         {
             //destroy all game objects tagged Player, Children and Present if a child despawns - this is also game over for the player
             //also direct player to the "GameOver" scene
@@ -69,6 +77,22 @@ public class Children : MonoBehaviour
             Destroy(GameObject.FindWithTag("Present"));
             _spawnManager.PlayerDies();
             SceneManager.LoadScene("GameOver");
+        }
+    }
+
+    private void CalculateScore()
+    {
+        if(this.GetComponent<SpriteRenderer>().sprite == _childSpriteHappy)
+        {
+            _gameManager.score += 3;
+        }
+        else if(this.GetComponent<SpriteRenderer>().sprite == _childSpriteNeutral)
+        {
+            _gameManager.score += 2;
+        }
+        else if(this.GetComponent<SpriteRenderer>().sprite == _childSpriteAngry)
+        {
+            _gameManager.score += 1;
         }
     }
 }
