@@ -14,11 +14,18 @@ public class SceneSwitcher : MonoBehaviour
     public void PlayButtonClicked()
     {
         SceneManager.LoadScene("Level");
+
     }
 
     public void BackButtonClicked()
     {
         SceneManager.LoadScene("Menu");
+    }
+
+    public void QuitButtonClicked()
+    {
+        Application.Quit();
+        Debug.Log("Quit Button has been pressed");
     }
     // Start is called before the first frame update
     void Start()
