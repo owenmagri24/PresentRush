@@ -39,28 +39,45 @@ public class Player : MonoBehaviour
 
     void playerMovement()
     {
-        //moving character with WASD / Arrow keys horizontally and vertically
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        //moving character with WASD buttons and 4 directional movement
 
-        //if both horizontal and vertical values are 0, plays the idle animation, else play walking animation
-        if(horizontal == 0 && vertical == 0){
-            animator.SetBool("isRunning", false);
+        //if the character is not facing the right side, flip it's animation for it to be able to face the right side
+        if (Input.GetKey(KeyCode.D))
+        {
+            transform.Translate(Vector3.right * speed * Time.deltaTime);
+            animator.SetBool("isRunning", true);
+            if (!facingRight)
+            {
+                flip();
+            }
         }
-        else {
+
+        //if the character is not facing the left side, flip it's animatino for it to be able to face the left side
+        else if (Input.GetKey(KeyCode.A))
+        {
+            transform.Translate(Vector3.left * speed * Time.deltaTime);
+            animator.SetBool("isRunning", true);
+            if (facingRight)
+            {
+                flip();
+            }
+        }
+
+        else if (Input.GetKey(KeyCode.W))
+        {
+            transform.Translate(Vector3.up * speed * Time.deltaTime);
             animator.SetBool("isRunning", true);
         }
 
-        Vector3 direction = new Vector3(horizontal,vertical,0);
-        transform.Translate(direction * speed * Time.deltaTime);
-
-
-        //loop to flip depending on horizontal value and direction facing
-        if(horizontal > 0 &&!facingRight){
-            flip();
+        else if (Input.GetKey(KeyCode.S))
+        {
+            transform.Translate(Vector3.down * speed * Time.deltaTime);
+            animator.SetBool("isRunning", true);
         }
-        else if(horizontal < 0 && facingRight){
-            flip();
+
+        else
+        {
+            animator.SetBool("isRunning", false);
         }
 
         //player boundaries / walls

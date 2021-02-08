@@ -10,7 +10,6 @@ public class Present : MonoBehaviour
 
     private GameManager _gameManager;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +22,7 @@ public class Present : MonoBehaviour
         }
         //start the despawn timer
         Destroy(this.gameObject, despawn);
+    
     }
 
     // Update is called once per frame
@@ -39,7 +39,7 @@ public class Present : MonoBehaviour
         }
         else if (other.transform.name == "Player")
         {
-            //else, add to preset count and destroy present
+            //else, add to present count and destroy present
             _gameManager.CollectedPresent();
             Destroy(this.gameObject);
         }
