@@ -21,17 +21,31 @@ public class Children : MonoBehaviour
     private GameManager _gameManager;
     
     private SpawnManager _spawnManager;
+
+    public AudioSource childrenSound;
     void Start()
     {
         //finding the SpawnManager object and then the script itself
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+
         //finding the GameManager object and then the script itself
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
         //preventing crashes, if GameManager isn't found a message will be included in the console
         if(_gameManager == null)
         {
             Debug.Log("GameManager was not found");
         }
+
+        //finding the Children_sound object and then its AudioSource file
+        childrenSound = GameObject.Find("Children_sound").GetComponent<AudioSource>();
+
+        //preventing crashes
+        if (childrenSound == null)
+        {
+            Debug.Log("Children sound not found");
+        }
+
 
         DifficultyDespawn(); //calling difficultydespawn function
         //destroys game object after set amount of seconds
@@ -46,9 +60,11 @@ public class Children : MonoBehaviour
     }
     
     private void OnTriggerEnter(Collider other) {
-        //If Child collides with player AND player has presents, child is destroyed and present count is deducted by 1
+        //If Child collides with player AND player has over 0 presents, play the sound of child being given the present,
+        //child is destroyed and present count is deducted by 1
         if(other.transform.name == "Player" && _gameManager.presentCount > 0)
         {
+            childrenSound.Play();
             Destroy(this.gameObject); //destroys child
             _gameManager.presentCount--; //deducts presentcount by 1
             CalculateScore();
