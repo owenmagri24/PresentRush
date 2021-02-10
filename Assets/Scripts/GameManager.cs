@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
 
         else if (presentCount == 2)
         {
-            _player.speed = 5.5f;
+            _player.speed = 6f;
         }
 
         else

@@ -7,7 +7,7 @@ public class Children : MonoBehaviour
 {
     //Despawn timer variable. SerializeField given to be changed by designers
     [SerializeField]
-    private float _despawn = 8f;
+    private float _despawn;
 
     [SerializeField] //AngryChild Sprite Variable
     private Sprite _childSpriteAngry;
@@ -33,14 +33,16 @@ public class Children : MonoBehaviour
             Debug.Log("GameManager was not found");
         }
 
+        DifficultyDespawn(); //calling difficultydespawn function
         //destroys game object after set amount of seconds
-        Destroy(this.gameObject, _despawn); 
+        Destroy(this.gameObject, _despawn);
     }
 
     // Update is called once per frame
     void Update()
     {
         ChildGameOver();//calling function
+        Debug.Log("Despawn: "+_despawn);
     }
     
     private void OnTriggerEnter(Collider other) {
@@ -50,28 +52,52 @@ public class Children : MonoBehaviour
             Destroy(this.gameObject); //destroys child
             _gameManager.presentCount--; //deducts presentcount by 1
             CalculateScore();
-            Debug.Log("Score:"+ _gameManager.score);
         }
     }
 
-    //function to change color of child after certain amount of time to indicate that he is about to despawn
+    private void DifficultyDespawn() //function to change despawn timer depending on score
+    {
+        if(_gameManager.score < 30)
+        {
+            _despawn = 10f;
+        }
+        else if(_gameManager.score >= 30 && _gameManager.score < 60)
+        {
+            _despawn = 9f;
+        }
+        else if(_gameManager.score >= 60 && _gameManager.score < 100)
+        {
+            _despawn = 8f;
+        }
+        else if(_gameManager.score >= 100)
+        {
+            _despawn = 7f;
+        }
+    }
+
+    //function to change color of child after certain amount of time to indicate that he is about to despawn depending on difficulty.
     private void ChildGameOver()
     {
-        _despawn -= Time.deltaTime; //reducing _despawn variable per second
+        _despawn -= Time.deltaTime;
 
-        if(_despawn < 5f){
-            //Gets the SpriteRenderer of this component and changes it to childSpriteNeutral Variable
-            this.GetComponent<SpriteRenderer>().sprite = _childSpriteNeutral;
-        }
-        if(_despawn < 3f)
+        if(_gameManager.score < 30)
         {
-            //Gets the SpriteRenderer of this component and changes it to childSpriteAngry Variable
-            this.GetComponent<SpriteRenderer>().sprite = _childSpriteAngry;
+            EasyTemper();
         }
-        if(_despawn < 0.2f)
+        else if(_gameManager.score >= 30 && _gameManager.score < 60)
         {
-            //destroy all game objects tagged Player, Children and Present if a child despawns - this is also game over for the player
-            //also direct player to the "GameOver" scene
+            MediumTemper();
+        }
+        else if(_gameManager.score >= 60 && _gameManager.score < 100)
+        {
+            HardTemper();
+        }
+        else if(_gameManager.score >= 100)
+        {
+            CrazyTemper();
+        }
+        if(_despawn < 0.2f) //player loses
+        {
             Destroy(GameObject.FindWithTag("Player"));
             Destroy(GameObject.FindWithTag("Children"));
             Destroy(GameObject.FindWithTag("Present"));
@@ -80,7 +106,7 @@ public class Children : MonoBehaviour
         }
     }
 
-    private void CalculateScore()
+    private void CalculateScore() //function that awards score depending on state of child
     {
         if(this.GetComponent<SpriteRenderer>().sprite == _childSpriteHappy)
         {
@@ -93,6 +119,52 @@ public class Children : MonoBehaviour
         else if(this.GetComponent<SpriteRenderer>().sprite == _childSpriteAngry)
         {
             _gameManager.score += 1;
+        }
+    }
+
+    private void EasyTemper()
+    {
+        if(_despawn < 6f){
+            //Gets the SpriteRenderer of this component and changes it to childSpriteNeutral Variable
+            this.GetComponent<SpriteRenderer>().sprite = _childSpriteNeutral;
+        }
+        if(_despawn < 3f)
+        {
+            //Gets the SpriteRenderer of this component and changes it to childSpriteAngry Variable
+            this.GetComponent<SpriteRenderer>().sprite = _childSpriteAngry;
+        }
+    }
+
+    private void MediumTemper()
+    {
+        if(_despawn < 5.5f){
+            this.GetComponent<SpriteRenderer>().sprite = _childSpriteNeutral;
+        }
+        if(_despawn < 2.5f)
+        {
+            this.GetComponent<SpriteRenderer>().sprite = _childSpriteAngry;
+        }
+    }
+
+    private void HardTemper()
+    {
+        if(_despawn < 5f){
+            this.GetComponent<SpriteRenderer>().sprite = _childSpriteNeutral;
+        }
+        if(_despawn < 2f)
+        {
+            this.GetComponent<SpriteRenderer>().sprite = _childSpriteAngry;
+        }
+    }
+
+    private void CrazyTemper()
+    {
+        if(_despawn < 4.5f){
+            this.GetComponent<SpriteRenderer>().sprite = _childSpriteNeutral;
+        }
+        if(_despawn < 2f)
+        {
+            this.GetComponent<SpriteRenderer>().sprite = _childSpriteAngry;
         }
     }
 }

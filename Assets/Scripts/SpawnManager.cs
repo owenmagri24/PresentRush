@@ -44,7 +44,7 @@ public class SpawnManager : MonoBehaviour
             //Set newChild as a child to ChildrenContainer
             newChild.transform.SetParent(_childrenContainer.transform);
             //Wait 7seconds before spawning next child
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(2.2f);
         }
     }
 
@@ -60,7 +60,7 @@ public class SpawnManager : MonoBehaviour
             //stores the present prefab in the PresentContainer
             newPresent.transform.SetParent(_presentContainer.transform);
             //wait 2 seconds before spawning next present
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1.9f);
         }
     }
 
