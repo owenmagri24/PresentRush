@@ -10,7 +10,11 @@ public class GameManager : MonoBehaviour
 
     public int score; //score variable
 
-    public Text presentText; //Fetching persent text object to update numbers of presents on screen
+    [SerializeField]
+    private Sprite[] _presentSprites; //array used to store different present sprites
+
+    [SerializeField]
+    private Image _presentImg; //image variable to store default present image
 
     public Text scoreText; //Fetcing score text object to update text
 
@@ -27,13 +31,18 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        presentText.text = "Presents: "+ presentCount; //Displays and updates present count
         scoreText.text = "Score: "+ score; //Displays and updates score
+        UpdatePresentCount();
     }
 
     public void CollectedPresent()
     {
         presentCount++;
+    }
+
+    public void UpdatePresentCount() //function to replace presentimage sprite depending on presentcount value
+    {
+        _presentImg.sprite = _presentSprites[presentCount];
     }
     public void PlayerSpeed()
     {
