@@ -21,7 +21,7 @@ public class Present : MonoBehaviour
         //preventing crashes, if GameManager isn't found a message will be included in the console
         if(_gameManager == null)
         {
-            Debug.Log("GameManager was not found");
+            Debug.LogError("GameManager was not found");
         }
 
         //finding the Present_sound object and then its AudioSource file
@@ -30,7 +30,7 @@ public class Present : MonoBehaviour
         //preventing crashes
         if (presentSound == null)
         {
-            Debug.Log("Present sound not found");
+            Debug.LogError("Present sound not found");
         }
         //start the despawn timer
         Destroy(this.gameObject, despawn);

@@ -46,7 +46,6 @@ public class Children : MonoBehaviour
             Debug.Log("Children sound not found");
         }
 
-
         DifficultyDespawn(); //calling difficultydespawn function
         //destroys game object after set amount of seconds
         Destroy(this.gameObject, _despawn);

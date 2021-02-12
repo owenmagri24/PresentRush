@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
         //preventing crashes, if GameManager isn't found a message will be included in the console
         if(_gameManager == null)
         {
-            Debug.Log("GameManager was not found");
+            Debug.LogError("GameManager was not found");
         }
     }
 
